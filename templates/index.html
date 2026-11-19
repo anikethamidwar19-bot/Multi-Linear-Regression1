@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startup Profit Prediction</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f7ff, #f8fbff, #eef8f6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .main-card {
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 50px rgba(15, 70, 120, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.12);
+        }
+
+        .brand h1 {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            color: #1e3a5f;
+            letter-spacing: -0.5px;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 13px;
+            color: #64748b;
+            margin: 8px 0 22px;
+        }
+
+        .badge {
+            width: fit-content;
+            margin: 0 auto 25px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .form-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 22px;
+            text-align: center;
+            color: #1e293b;
+        }
+
+        .form-title span {
+            color: #0d9488;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #334155;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #1e293b;
+            outline: none;
+            transition: 0.25s;
+        }
+
+        input:focus, select:focus {
+            border-color: #3b82f6;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+        }
+
+        .predict-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2563eb, #0d9488);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .prediction {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2563eb, #0d9488);
+            color: white;
+            text-align: center;
+        }
+
+        .prediction-label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .prediction-value {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-card">
+
+        <div class="brand">
+            <h1>Startup Profit Predictor</h1>
+        </div>
+
+        <div class="tagline">
+            Machine Learning • Multiple Linear Regression
+        </div>
+
+        <div class="badge">
+            ML Prediction System
+        </div>
+
+        <div class="form-title">
+            Enter Details to <span>Predict Profit</span>
+        </div>
+
+        <form action="/predict" method="post">
+
+            <div class="input-group">
+                <label>R&D Spend</label>
+                <input type="number" name="rnd" placeholder="Enter R&D spend" step="any" required>
+            </div>
+
+            <div class="input-group">
+                <label>Administration Spend</label>
+                <input type="number" name="admin" placeholder="Enter administration spend" step="any" required>
+            </div>
+
+            <div class="input-group">
+                <label>Marketing Spend</label>
+                <input type="number" name="marketing" placeholder="Enter marketing spend" step="any" required>
+            </div>
+
+            <div class="input-group">
+                <label>State</label>
+                <select name="state" required>
+                    <option value="" disabled selected>Select a state</option>
+                    <option value="0">New York</option>
+                    <option value="1">California</option>
+                    <option value="2">Florida</option>
+                </select>
+            </div>
+
+            <button type="submit" class="predict-btn">
+                Predict Profit
+            </button>
+
+        </form>
+
+        {% if prediction_text %}
+        <div class="prediction">
+            <div class="prediction-label">Predicted Profit</div>
+            <div class="prediction-value">₹ {{ prediction_text }}</div>
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            Multiple Linear Regression Project
+        </div>
+
+    </div>
+
+</body>
+</html>
